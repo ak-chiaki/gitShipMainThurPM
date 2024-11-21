@@ -24,7 +24,7 @@ float speed = 0;
 color white = color(255);
 color grey = color(100);
 color black = color(0);
-color holo = color(255, 255, 0); //use 0, 255, 255 for copilot's training ground
+color holo = color(0, 255, 255);
 
 //slider values: 0, 10 values set in code
 float slider1 = 0;
@@ -41,7 +41,7 @@ boolean atWarp;
 boolean showDialogue;
 
 Star[] stars = new Star[400];
-Planet[] planets;
+Planet earth;
 Person person;
 Checksum healthbar;
 Junk junk;
@@ -70,10 +70,8 @@ void draw(){
      stars[i].display();
     }
     //location
-    for(Planet planet : planets){
-      planet.update();
-      planet.display();
-    }
+     earth.update();
+     earth.display();
   
     //viewscreen
     if(showDialogue){
@@ -110,12 +108,10 @@ void init(){
   for(String item : cargo){
     println(item);
   }
+  //engineering adjustments
+  DeregulateDilithuimColumator();
   //location
-  //150 to 450, 100 to 200, 50 to 375, 0 to 50
-  planets = new Planet[3];
-  planets[0] = new Planet(0.15*width, 0.3*height, 315, 20, 15, 8);
-  planets[1] = new Planet(0.25*width, 0.2 * height, 20, 5, 36, 40);
-  planets[2] = new Planet(0.9*width, 0.45*height, 18, 17, 50, 5);
+  earth = new Planet(2*width/3, height/4, 50);
   //dialogue
   person = new Person();
   char[] q = binary(healthbar.checksum).toCharArray();
@@ -136,6 +132,9 @@ void dropOutOfWarp(){
   planets[0].sliders();
   location = "Kessel";
 }
+/////////////////////////////////////////////////////
+//////////end engineering working party//////////////
+/////////////////////////////////////////////////////
 
 void noSignal(){
   noStroke();
